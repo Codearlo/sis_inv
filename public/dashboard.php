@@ -24,6 +24,7 @@ $dashboardData = $getDashboardData->execute();
 <head>
     <meta charset="UTF-8">
     <title>Dashboard - Inventario</title>
+    <link rel="stylesheet" href="css/sidebar_styles.css">
     <link rel="stylesheet" href="css/dashboard_styles.css">
 </head>
 <body>
