@@ -13,8 +13,8 @@ body {
 
 /* --- Contenido Principal --- */
 .main-content {
-    /* Margen izquierdo = ancho sidebar (80px) + margen sidebar (10px) + espacio extra (20px) */
-    margin-left: 110px; 
+    /* Margen izquierdo igual al espacio que ocupa el sidebar más un pequeño margen */
+    margin-left: 100px;
     flex-grow: 1;
     padding: 30px;
 }
