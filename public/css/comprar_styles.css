@@ -1,96 +1,77 @@
-/* Estilos específicos para la página de Registrar Compra */
-.comprar_main-content {
-    margin-left: 110px; /* Coincide con el espacio del sidebar + margen */
+/* Estilos para la página de listado de compras */
+.compras_main-content {
+    margin-left: 110px;
     padding: 30px;
 }
 
-.comprar_main-content header h1 {
+.compras_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
+}
+
+.compras_header h1 {
     color: #1d1d1f;
     font-weight: 600;
 }
 
-.comprar_form-container {
-    background-color: #fff;
-    padding: 30px 40px;
-    border-radius: 12px;
-    border: 1px solid #e5e5e5;
-    max-width: 700px;
-}
-
-.comprar_form-group {
-    margin-bottom: 20px;
-}
-
-.comprar_form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: #374151;
-}
-
-.comprar_form-group input[type="text"],
-.comprar_form-group input[type="date"],
-.comprar_form-group input[type="number"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #D1D5DB;
-    border-radius: 8px;
-    font-size: 1rem;
-    color: #111827;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.comprar_form-group input:focus {
-    outline: none;
-    border-color: #6D28D9;
-    box-shadow: 0 0 0 3px #F5F3FF;
-}
-
-.comprar_checkbox-group {
-    display: flex;
-    align-items: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
-}
-
-.comprar_checkbox-group input {
-    margin-right: 10px;
-    height: 18px;
-    width: 18px;
-    accent-color: #6D28D9;
-}
-
-.comprar_button {
-    width: 100%;
-    padding: 14px;
+.compras_button-new {
     background-color: #6D28D9;
-    color: white;
-    border: none;
-    font-size: 1rem;
-    font-weight: 600;
+    color: #fff;
+    padding: 10px 20px;
     border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s;
 }
-
-.comprar_button:hover {
+.compras_button-new:hover {
     background-color: #5B21B6;
 }
 
-.comprar_message {
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    font-weight: 500;
+.compras_table-container {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+    overflow-x: auto;
 }
 
-.comprar_message.success {
+.compras_table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.compras_table-container th {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #374151;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.compras_table-container td {
+    padding: 15px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #4b5563;
+}
+
+.compras_table-container tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.compras_status {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+.compras_status.paid {
     background-color: #D1FAE5;
     color: #065F46;
 }
-
-.comprar_message.error {
+.compras_status.pending {
     background-color: #FEE2E2;
     color: #991B1B;
 }
