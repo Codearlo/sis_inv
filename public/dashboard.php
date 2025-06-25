@@ -27,20 +27,7 @@ $dashboardData = $getDashboardData->execute();
     <link rel="stylesheet" href="css/dashboard_styles.css">
 </head>
 <body>
-    <div class="sidebar">
-        <h3>Inventario PC</h3>
-        <nav>
-            <ul>
-                <li class="active"><a href="dashboard.php">Dashboard</a></li>
-                <li><a href="comprar.php">Registrar Compra</a></li>
-                <li><a href="#">Gestionar Productos</a></li>
-                <li><a href="#">Reportes</a></li>
-            </ul>
-        </nav>
-        <div class="logout-area">
-            <a href="logout.php">Cerrar Sesión</a>
-        </div>
-    </div>
+    <?php require_once 'parts/sidebar.php'; ?>
 
     <div class="main-content">
         <header>
