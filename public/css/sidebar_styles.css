@@ -17,7 +17,8 @@
     z-index: 1000;
 }
 
-.sidebar_container:hover {
+/* Regla para el estado expandido */
+.sidebar_container.is-expanded {
     width: 280px;
 }
 
@@ -31,7 +32,7 @@
     color: #111827;
     justify-content: center;
 }
-.sidebar_container:hover .sidebar_header {
+.sidebar_container.is-expanded .sidebar_header {
     justify-content: flex-start;
 }
 
@@ -52,16 +53,16 @@
     align-items: center;
     text-decoration: none;
     color: #4B5563;
-    padding: 14px 12px; /* Padding horizontal consistente */
+    padding: 14px 12px;
     margin: 4px 12px;
     border-radius: 10px;
     font-weight: 500;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    justify-content: center; /* Centrar contenido por defecto (colapsado) */
+    justify-content: center;
 }
 
-.sidebar_container:hover .sidebar_nav-item {
-    justify-content: flex-start; /* Alinear a la izquierda al expandir */
+.sidebar_container.is-expanded .sidebar_nav-item {
+    justify-content: flex-start;
 }
 
 .sidebar_nav-item:hover {
@@ -90,20 +91,20 @@
     min-width: 24px;
     color: #6B7280;
     transition: color 0.2s ease-in-out;
-    flex-shrink: 0; /* Evita que el ícono se encoja */
+    flex-shrink: 0;
 }
 
 .sidebar_text {
     opacity: 0;
-    width: 0; /* El texto no ocupa espacio cuando está colapsado */
-    overflow: hidden; /* Oculta el texto para que no desborde */
-    transition: opacity 0.2s ease-in-out, width 0.2s ease-in-out;
+    width: 0;
+    overflow: hidden;
+    transition: opacity 0.2s ease-in-out, width 0.2s ease-in-out, margin-left 0.3s ease-in-out;
 }
 
-.sidebar_container:hover .sidebar_text {
+.sidebar_container.is-expanded .sidebar_text {
     opacity: 1;
-    width: auto; /* El texto recupera su ancho al expandir */
-    margin-left: 22px; /* Añade separación con el ícono solo al expandir */
+    width: auto;
+    margin-left: 22px;
 }
 
 .sidebar_footer {
