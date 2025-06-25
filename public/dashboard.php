@@ -24,8 +24,8 @@ $dashboardData = $getDashboardData->execute();
 <head>
     <meta charset="UTF-8">
     <title>Dashboard - Inventario</title>
-    <link rel="stylesheet" href="css/sidebar_styles.css?v=1.3">
-    <link rel="stylesheet" href="css/dashboard_styles.css?v=1.3">
+    <link rel="stylesheet" href="css/sidebar_styles.css?v=1.4">
+    <link rel="stylesheet" href="css/dashboard_styles.css?v=1.4">
 </head>
 <body>
     <?php require_once 'parts/sidebar.php'; ?>
