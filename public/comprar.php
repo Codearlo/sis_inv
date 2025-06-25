@@ -1,8 +1,16 @@
 <?php
 require_once '../config/database.php';
 require_once '../app/UseCase/RegistrarCompra.php';
+require_once '../app/Infrastructure/Auth/AuthService.php';
+
+$auth = new AuthService($pdo);
+if (!$auth->estaAutenticado()) {
+    header("Location: login.php");
+    exit;
+}
 
 $mensaje = '';
+$tipo_mensaje = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $datos = [
@@ -18,38 +26,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $registrador = new RegistrarCompra($pdo);
     if ($registrador->ejecutar($datos)) {
         $mensaje = "Compra registrada correctamente.";
+        $tipo_mensaje = "success";
     } else {
         $mensaje = "Error al registrar la compra.";
+        $tipo_mensaje = "error";
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Registrar Compra</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <title>Registrar Compra - Inventario</title>
+    <link rel="stylesheet" href="css/sidebar_styles.css?v=1.5">
+    <link rel="stylesheet" href="css/comprar_styles.css?v=1.0">
 </head>
 <body>
-<div class="container">
-    <h2>Registrar Compra</h2>
+    <?php require_once 'parts/sidebar.php'; ?>
 
-    <?php if ($mensaje): ?>
-        <div class="message success"><?php echo $mensaje; ?></div>
-    <?php endif; ?>
+    <div class="comprar_main-content">
+        <header>
+            <h1>Registrar Nueva Compra</h1>
+        </header>
 
-    <form method="POST">
-        <input type="text" name="producto" placeholder="Nombre del producto" required>
-        <input type="text" name="proveedor" placeholder="Proveedor (AliExpress, Temu, etc)" required>
-        <label>Fecha de compra:</label>
-        <input type="date" name="fecha_compra" required>
-        <label>Fecha de recepción:</label>
-        <input type="date" name="fecha_recibido" required>
-        <input type="number" name="precio_unitario" step="0.01" placeholder="Precio por unidad" required>
-        <input type="number" name="cantidad" placeholder="Cantidad" required>
-        <label><input type="checkbox" name="pagado"> Pagado</label><br><br>
-        <button type="submit">Registrar compra</button>
-    </form>
-</div>
+        <div class="comprar_form-container">
+            <?php if ($mensaje): ?>
+                <div class="comprar_message <?php echo $tipo_mensaje; ?>"><?php echo $mensaje; ?></div>
+            <?php endif; ?>
+
+            <form method="POST">
+                <div class="comprar_form-group">
+                    <label for="producto">Nombre del producto</label>
+                    <input type="text" id="producto" name="producto" placeholder="Ej: Teclado Mecánico RGB" required>
+                </div>
+
+                <div class="comprar_form-group">
+                    <label for="proveedor">Proveedor</label>
+                    <input type="text" id="proveedor" name="proveedor" placeholder="Ej: AliExpress, Amazon, etc." required>
+                </div>
+                
+                <div class="comprar_form-group">
+                    <label for="fecha_compra">Fecha de compra</label>
+                    <input type="date" id="fecha_compra" name="fecha_compra" required>
+                </div>
+
+                <div class="comprar_form-group">
+                    <label for="fecha_recibido">Fecha de recepción</label>
+                    <input type="date" id="fecha_recibido" name="fecha_recibido" required>
+                </div>
+
+                <div class="comprar_form-group">
+                    <label for="precio_unitario">Precio por unidad</label>
+                    <input type="number" id="precio_unitario" name="precio_unitario" step="0.01" placeholder="Ej: 45.50" required>
+                </div>
+
+                <div class="comprar_form-group">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" id="cantidad" name="cantidad" placeholder="Ej: 10" required>
+                </div>
+                
+                <div class="comprar_checkbox-group">
+                    <input type="checkbox" id="pagado" name="pagado">
+                    <label for="pagado">Marcar como pagado</label>
+                </div>
+                
+                <button type="submit" class="comprar_button">Registrar compra</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
