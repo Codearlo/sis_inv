@@ -7,10 +7,10 @@
         top: 10px;
         left: 10px;
         
-        background-color: #FFFFFF; /* Fondo blanco */
+        background-color: #FFFFFF;
         border-radius: 18px;
-        border: 1px solid #E5E7EB; /* Borde gris claro */
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra suave para flotar */
+        border: 1px solid #E5E7EB;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 
         display: flex;
         flex-direction: column;
@@ -31,11 +31,16 @@
         min-height: 70px;
         font-size: 1.2rem;
         font-weight: 600;
-        color: #111827; /* Texto oscuro */
+        color: #111827;
+        /* Corrección para centrar el logo cuando está colapsado */
+        justify-content: center;
+    }
+    .sidebar:hover .sidebar-header {
+        justify-content: flex-start;
     }
     
     .sidebar-header .sidebar-icon {
-        color: #6D28D9; /* Morado para el logo */
+        color: #6D28D9;
     }
 
     .sidebar-nav {
@@ -43,33 +48,40 @@
         display: flex;
         flex-direction: column;
         padding: 10px 0;
-        border-top: 1px solid #F3F4F6; /* Separador muy sutil */
+        border-top: 1px solid #F3F4F6;
     }
 
     .sidebar .nav-item {
         display: flex;
         align-items: center;
         text-decoration: none;
-        color: #4B5563; /* Texto gris oscuro */
-        padding: 14px 28px;
+        color: #4B5563;
+        padding: 14px 0; /* Padding vertical, horizontal se maneja con justify-content */
         margin: 4px 12px;
-        border-radius: 10px; /* Bordes más suaves */
+        border-radius: 10px;
         font-weight: 500;
         transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        /* Centrado por defecto (colapsado) */
+        justify-content: center;
+    }
+
+    .sidebar:hover .nav-item {
+        /* Al expandir, alinear a la izquierda */
+        justify-content: flex-start;
+        padding: 14px 28px; /* Restaurar padding original */
     }
 
     .sidebar .nav-item:hover {
-        background-color: #F5F3FF; /* Fondo morado muy claro */
-        color: #5B21B6; /* Morado oscuro al pasar el cursor */
+        background-color: #F5F3FF;
+        color: #5B21B6;
     }
     
     .sidebar .nav-item.active {
-        background-color: #6D28D9; /* Morado principal para el activo */
+        background-color: #6D28D9;
         color: #FFFFFF;
         font-weight: 600;
     }
     
-    /* Para que el ícono activo y en hover se vea bien */
     .sidebar .nav-item.active .sidebar-icon,
     .sidebar .nav-item.active:hover .sidebar-icon {
         color: #FFFFFF;
@@ -83,9 +95,14 @@
         align-items: center;
         justify-content: center;
         min-width: 24px;
-        margin-right: 22px;
+        /* Margen a cero por defecto (colapsado) */
+        margin-right: 0;
         color: #6B7280;
-        transition: color 0.2s ease-in-out;
+        transition: color 0.2s ease-in-out, margin-right 0.3s ease-in-out;
+    }
+    .sidebar:hover .sidebar-icon {
+        /* Restaurar margen al expandir */
+        margin-right: 22px;
     }
 
     .sidebar-text {
@@ -102,16 +119,15 @@
         border-top: 1px solid #F3F4F6;
     }
     
-    /* Estilos específicos para Cerrar Sesión */
     .sidebar .logout-item {
-        color: #EF4444; /* Rojo bajito */
+        color: #EF4444;
     }
     .sidebar .logout-item:hover {
-        background-color: #FEE2E2; /* Fondo rojo muy claro */
-        color: #B91C1C; /* Rojo fuerte */
+        background-color: #FEE2E2;
+        color: #B91C1C;
     }
     .sidebar .logout-item:hover .sidebar-icon {
-        color: #B91C1C; /* Ícono en rojo fuerte */
+        color: #B91C1C;
     }
 
 </style>
