@@ -1,16 +1,14 @@
-/* Estilos para el Sidebar Flotante - Tema Claro */
-.sidebar {
-    width: 80px; /* Ancho encogido */
+/* Estilos específicos para el componente Sidebar */
+.sidebar_container {
+    width: 80px;
     height: calc(100vh - 20px);
     position: fixed;
     top: 10px;
     left: 10px;
-    
     background-color: #FFFFFF;
     border-radius: 18px;
     border: 1px solid #E5E7EB;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-
     display: flex;
     flex-direction: column;
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -19,11 +17,11 @@
     z-index: 1000;
 }
 
-.sidebar:hover {
+.sidebar_container:hover {
     width: 280px;
 }
 
-.sidebar-header {
+.sidebar_header {
     display: flex;
     align-items: center;
     padding: 22px 26px;
@@ -31,18 +29,17 @@
     font-size: 1.2rem;
     font-weight: 600;
     color: #111827;
-    /* Corrección para centrar el logo cuando está colapsado */
     justify-content: center;
 }
-.sidebar:hover .sidebar-header {
+.sidebar_container:hover .sidebar_header {
     justify-content: flex-start;
 }
 
-.sidebar-header .sidebar-icon {
+.sidebar_header .sidebar_icon {
     color: #6D28D9;
 }
 
-.sidebar-nav {
+.sidebar_nav {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -50,82 +47,77 @@
     border-top: 1px solid #F3F4F6;
 }
 
-.sidebar .nav-item {
+.sidebar_nav-item {
     display: flex;
     align-items: center;
     text-decoration: none;
     color: #4B5563;
-    padding: 14px 0; /* Padding vertical, horizontal se maneja con justify-content */
+    padding: 14px 0;
     margin: 4px 12px;
     border-radius: 10px;
     font-weight: 500;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    /* Centrado por defecto (colapsado) */
     justify-content: center;
 }
 
-.sidebar:hover .nav-item {
-    /* Al expandir, alinear a la izquierda */
+.sidebar_container:hover .sidebar_nav-item {
     justify-content: flex-start;
-    padding: 14px 28px; /* Restaurar padding original */
+    padding: 14px 28px;
 }
 
-.sidebar .nav-item:hover {
+.sidebar_nav-item:hover {
     background-color: #F5F3FF;
     color: #5B21B6;
 }
 
-.sidebar .nav-item.active {
+.sidebar_nav-item.active {
     background-color: #6D28D9;
     color: #FFFFFF;
     font-weight: 600;
 }
 
-.sidebar .nav-item.active .sidebar-icon,
-.sidebar .nav-item.active:hover .sidebar-icon {
+.sidebar_nav-item.active .sidebar_icon,
+.sidebar_nav-item.active:hover .sidebar_icon {
     color: #FFFFFF;
 }
-.sidebar .nav-item:hover .sidebar-icon {
+.sidebar_nav-item:hover .sidebar_icon {
     color: #5B21B6;
 }
 
-.sidebar-icon {
+.sidebar_icon {
     display: flex;
     align-items: center;
     justify-content: center;
     min-width: 24px;
-    /* Margen a cero por defecto (colapsado) */
     margin-right: 0;
     color: #6B7280;
     transition: color 0.2s ease-in-out, margin-right 0.3s ease-in-out;
 }
-.sidebar:hover .sidebar-icon {
-    /* Restaurar margen al expandir */
+.sidebar_container:hover .sidebar_icon {
     margin-right: 22px;
 }
 
-.sidebar-text {
+.sidebar_text {
     opacity: 0;
     transition: opacity 0.2s 0.05s ease-in-out;
 }
 
-.sidebar:hover .sidebar-text {
+.sidebar_container:hover .sidebar_text {
     opacity: 1;
 }
 
-.sidebar-footer {
+.sidebar_footer {
     padding: 20px 0;
     border-top: 1px solid #F3F4F6;
 }
 
-/* Estilos específicos para Cerrar Sesión */
-.sidebar .logout-item {
+.sidebar_logout-item {
     color: #EF4444;
 }
-.sidebar .logout-item:hover {
+.sidebar_logout-item:hover {
     background-color: #FEE2E2;
     color: #B91C1C;
 }
-.sidebar .logout-item:hover .sidebar-icon {
+.sidebar_logout-item:hover .sidebar_icon {
     color: #B91C1C;
 }
