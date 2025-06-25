@@ -24,13 +24,19 @@
 .sidebar_header {
     display: flex;
     align-items: center;
-    padding: 22px 28px;
+    padding: 22px 0; /* Sin padding horizontal para permitir el centrado */
+    justify-content: center; /* Centrado por defecto */
     min-height: 70px;
     font-size: 1.2rem;
     font-weight: 600;
     color: #111827;
     flex-shrink: 0;
 }
+.sidebar_container.is-expanded .sidebar_header {
+    justify-content: flex-start;
+    padding: 22px 28px; /* Padding restaurado al expandir */
+}
+
 
 .sidebar_header .sidebar_icon {
     color: #6D28D9;
@@ -49,13 +55,19 @@
     align-items: center;
     text-decoration: none;
     color: #4B5563;
-    padding: 14px 28px;
+    padding: 14px 0; /* Sin padding horizontal para permitir el centrado */
     margin: 4px 12px;
     border-radius: 10px;
     font-weight: 500;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    position: relative; /* Contenedor para el posicionamiento del ícono */
+    justify-content: center; /* Centrado por defecto */
 }
+
+.sidebar_container.is-expanded .sidebar_nav-item {
+    justify-content: flex-start; /* Alinear a la izquierda al expandir */
+    padding: 14px 28px; /* Padding restaurado al expandir */
+}
+
 
 .sidebar_nav-item:hover {
     background-color: #F5F3FF;
@@ -80,44 +92,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 24px;
     color: #6B7280;
+    transition: color 0.2s ease-in-out;
     flex-shrink: 0;
-
-    /* --- LÓGICA DE POSICIÓN ANIMADA --- */
-    position: absolute;
-    top: 50%;
-    /* Posición por defecto (colapsado): centrado */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: color 0.2s ease, left 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-.sidebar_container.is-expanded .sidebar_icon {
-    /* Posición al expandir: a la izquierda */
-    left: 28px;
-    transform: translateY(-50%); /* Solo se traslada en Y */
-}
-
 
 .sidebar_text {
     opacity: 0;
-    transform: translateX(-15px);
-    transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    width: 0;
+    margin-left: 0;
+    transition: opacity 0.2s ease-out, width 0.2s ease-out, margin-left 0.2s ease-out;
     white-space: nowrap;
-    /* Margen para no superponerse con el ícono posicionado */
-    margin-left: 50px;
 }
 
 .sidebar_container.is-expanded .sidebar_text {
     opacity: 1;
-    transform: translateX(0);
+    width: auto;
+    margin-left: 22px;
 }
 
 .sidebar_footer {
     padding: 20px 0;
     border-top: 1px solid #F3F4F6;
     margin-top: auto;
-    flex-shrink: 0;
 }
 
 .sidebar_logout-item {
