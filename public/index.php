@@ -9,5 +9,6 @@ if (!$auth->estaAutenticado()) {
     exit;
 }
 
-echo "<h1>Bienvenido a la plataforma</h1>";
-echo "<a href='logout.php'>Cerrar sesión</a>";
+// Redirigir al dashboard una vez autenticado
+header("Location: dashboard.php");
+exit;
