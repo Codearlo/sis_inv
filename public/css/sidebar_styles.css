@@ -24,7 +24,6 @@
 .sidebar_header {
     display: flex;
     align-items: center;
-    /* Se ajusta el padding para que el ícono se vea bien en estado colapsado */
     padding: 22px 26px;
     min-height: 70px;
     font-size: 1.2rem;
@@ -49,7 +48,6 @@
     align-items: center;
     text-decoration: none;
     color: #4B5563;
-    /* Padding izquierdo fijo para alinear los íconos */
     padding: 14px 28px;
     margin: 4px 12px;
     border-radius: 10px;
@@ -83,22 +81,21 @@
     min-width: 24px;
     color: #6B7280;
     transition: color 0.2s ease-in-out;
-    flex-shrink: 0; /* Evita que el ícono se encoja */
+    flex-shrink: 0;
+    margin-right: 22px; /* Margen fijo para separar del texto */
 }
 
+/* --- NUEVA ANIMACIÓN --- */
 .sidebar_text {
     opacity: 0;
-    width: 0;
-    overflow: hidden;
-    /* Se añade margen a la transición para que sea suave */
-    margin-left: 0;
-    transition: opacity 0.2s ease-in-out, width 0.2s ease-in-out, margin-left 0.2s ease-in-out;
+    transform: translateX(-15px); /* Inicia ligeramente a la izquierda y oculto */
+    transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    white-space: nowrap; /* Evita que el texto se parta en la animación */
 }
 
 .sidebar_container.is-expanded .sidebar_text {
     opacity: 1;
-    width: auto;
-    margin-left: 22px; /* Añade separación con el ícono solo al expandir */
+    transform: translateX(0); /* Vuelve a su posición original */
 }
 
 .sidebar_footer {
