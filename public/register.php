@@ -50,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
     <h2>Crear Cuenta</h2>
