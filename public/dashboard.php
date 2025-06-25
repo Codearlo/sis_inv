@@ -3,20 +3,19 @@ require_once '../config/database.php';
 require_once '../app/Infrastructure/Auth/AuthService.php';
 require_once '../app/Dashboard/UseCase/GetDashboardData.php';
 
-// Iniciar el namespace para poder instanciar la clase del UseCase
 use App\Dashboard\UseCase\GetDashboardData;
 
 $auth = new AuthService($pdo);
-
 if (!$auth->estaAutenticado()) {
     header("Location: login.php");
     exit;
 }
 
-// Instanciar y ejecutar el caso de uso
+// Marcador para el sidebar
+$active_page = 'dashboard';
+
 $getDashboardData = new GetDashboardData($pdo);
 $dashboardData = $getDashboardData->execute();
-
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +23,7 @@ $dashboardData = $getDashboardData->execute();
 <head>
     <meta charset="UTF-8">
     <title>Dashboard - Inventario</title>
-    <link rel="stylesheet" href="css/sidebar_styles.css?v=1.5">
+    <link rel="stylesheet" href="css/sidebar_styles.css?v=1.6">
     <link rel="stylesheet" href="css/dashboard_styles.css?v=1.5">
 </head>
 <body>
@@ -108,6 +107,5 @@ $dashboardData = $getDashboardData->execute();
             </div>
         </div>
     </div>
-
-    </body>
+</body>
 </html>

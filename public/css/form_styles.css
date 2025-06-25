@@ -1,0 +1,102 @@
+/* Estilos reutilizables para formularios */
+.form_main-content {
+    margin-left: 110px;
+    padding: 30px;
+}
+
+.form_main-content header h1 {
+    margin-bottom: 20px;
+    color: #1d1d1f;
+    font-weight: 600;
+}
+
+.form_container {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+    max-width: 700px;
+}
+
+.form_group {
+    margin-bottom: 20px;
+}
+
+.form_group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.form_group input[type="text"],
+.form_group input[type="date"],
+.form_group input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #111827;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form_group input:focus {
+    outline: none;
+    border-color: #6D28D9;
+    box-shadow: 0 0 0 3px #F5F3FF;
+}
+
+.form_checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.form_checkbox-group input {
+    margin-right: 10px;
+    height: 18px;
+    width: 18px;
+    accent-color: #6D28D9;
+}
+
+.form_button {
+    width: 100%;
+    padding: 14px;
+    background-color: #6D28D9;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.form_button:hover {
+    background-color: #5B21B6;
+}
+
+.form_message {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.form_message.success {
+    background-color: #D1FAE5;
+    color: #065F46;
+}
+
+.form_message.error {
+    background-color: #FEE2E2;
+    color: #991B1B;
+}
+
+.form_message a {
+    color: #044A34;
+    font-weight: 700;
+    text-decoration: underline;
+}
