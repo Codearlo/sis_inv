@@ -2,12 +2,15 @@
     /* Estilos encapsulados para el Sidebar Flotante - Tema Oscuro */
     .sidebar {
         width: 80px; /* Ancho encogido */
-        background-color: #1A1D21; /* Fondo oscuro del sidebar */
-        border-right: 1px solid #2A2E33; /* Borde sutil */
-        height: 100vh;
+        height: calc(100vh - 20px); /* Altura ajustada para el margen */
         position: fixed;
-        top: 0;
-        left: 0;
+        top: 10px; /* Margen superior para el efecto flotante */
+        left: 10px; /* Margen izquierdo para el efecto flotante */
+        
+        background-color: #1A1D21; /* Fondo oscuro del sidebar */
+        border-radius: 18px; /* Bordes redondeados */
+        border: 1px solid #2A2E33;
+
         display: flex;
         flex-direction: column;
         transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);

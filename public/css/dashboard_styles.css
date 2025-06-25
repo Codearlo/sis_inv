@@ -13,11 +13,10 @@ body {
 
 /* --- Contenido Principal --- */
 .main-content {
-    /* Margen izquierdo fijo igual al ancho del sidebar encogido */
-    margin-left: 80px; 
+    /* Margen izquierdo = ancho sidebar (80px) + margen sidebar (10px) + espacio extra (20px) */
+    margin-left: 110px; 
     flex-grow: 1;
     padding: 30px;
-    /* La transición ya no es necesaria aquí */
 }
 
 .main-content header h1 {
