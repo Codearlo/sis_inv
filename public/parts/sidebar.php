@@ -1,30 +1,37 @@
 <style>
-    /* Estilos encapsulados para el Sidebar */
+    /* Estilos encapsulados para el Sidebar Flotante - Tema Oscuro */
     .sidebar {
         width: 80px; /* Ancho encogido */
-        background-color: #ffffff;
-        border-right: 1px solid #e5e5e5;
+        background-color: #1A1D21; /* Fondo oscuro del sidebar */
+        border-right: 1px solid #2A2E33; /* Borde sutil */
         height: 100vh;
         position: fixed;
+        top: 0;
+        left: 0;
         display: flex;
         flex-direction: column;
-        transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         overflow: hidden;
         white-space: nowrap;
         z-index: 1000;
     }
 
     .sidebar:hover {
-        width: 260px; /* Ancho expandido */
+        width: 280px; /* Ancho expandido */
     }
 
     .sidebar-header {
         display: flex;
         align-items: center;
         padding: 22px 26px;
+        min-height: 70px;
         font-size: 1.2rem;
         font-weight: 600;
-        color: #000;
+        color: #FFFFFF;
+    }
+    
+    .sidebar-header .sidebar-icon {
+        color: #3B82F6; /* Azul brillante para el logo */
     }
 
     .sidebar-nav {
@@ -32,42 +39,50 @@
         display: flex;
         flex-direction: column;
         padding: 10px 0;
+        border-top: 1px solid #2A2E33;
     }
 
     .sidebar .nav-item {
         display: flex;
         align-items: center;
         text-decoration: none;
-        color: #333;
+        color: #A0AEC0; /* Texto gris claro */
         padding: 14px 28px;
         margin: 4px 12px;
         border-radius: 8px;
+        font-weight: 500;
         transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
     }
 
     .sidebar .nav-item:hover {
-        background-color: #f0f0f0;
-        color: #007aff;
+        background-color: #252A2F;
+        color: #FFFFFF; /* Texto blanco al pasar el cursor */
     }
     
     .sidebar .nav-item.active {
-        background-color: #007aff;
-        color: #fff;
+        background-color: #2563EB; /* Azul más intenso para el activo */
+        color: #FFFFFF;
+        font-weight: 600;
     }
     
-    .sidebar .nav-item.active:hover {
-        color: #fff;
+    .sidebar .nav-item.active .sidebar-icon,
+    .sidebar .nav-item.active:hover .sidebar-icon {
+        color: #FFFFFF;
     }
 
     .sidebar-icon {
-        display: inline-block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         min-width: 24px;
-        margin-right: 20px;
+        margin-right: 22px;
+        color: #718096; /* Color de íconos */
+        transition: color 0.2s ease-in-out;
     }
 
     .sidebar-text {
         opacity: 0;
-        transition: opacity 0.2s ease-in-out;
+        transition: opacity 0.2s 0.05s ease-in-out;
     }
 
     .sidebar:hover .sidebar-text {
@@ -75,7 +90,8 @@
     }
 
     .sidebar-footer {
-        padding-bottom: 20px;
+        padding: 20px 0;
+        border-top: 1px solid #2A2E33;
     }
 </style>
 
@@ -84,7 +100,7 @@
         <span class="sidebar-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
         </span>
-        <span class="sidebar-text">Inventario PC</span>
+        <span class="sidebar-text">Inventario</span>
     </div>
     <nav class="sidebar-nav">
         <a href="dashboard.php" class="nav-item active">
