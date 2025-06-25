@@ -52,17 +52,16 @@
     align-items: center;
     text-decoration: none;
     color: #4B5563;
-    padding: 14px 0;
+    padding: 14px 12px; /* Padding horizontal consistente */
     margin: 4px 12px;
     border-radius: 10px;
     font-weight: 500;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    justify-content: center;
+    justify-content: center; /* Centrar contenido por defecto (colapsado) */
 }
 
 .sidebar_container:hover .sidebar_nav-item {
-    justify-content: flex-start;
-    padding: 14px 28px;
+    justify-content: flex-start; /* Alinear a la izquierda al expandir */
 }
 
 .sidebar_nav-item:hover {
@@ -89,21 +88,22 @@
     align-items: center;
     justify-content: center;
     min-width: 24px;
-    margin-right: 0;
     color: #6B7280;
-    transition: color 0.2s ease-in-out, margin-right 0.3s ease-in-out;
-}
-.sidebar_container:hover .sidebar_icon {
-    margin-right: 22px;
+    transition: color 0.2s ease-in-out;
+    flex-shrink: 0; /* Evita que el ícono se encoja */
 }
 
 .sidebar_text {
     opacity: 0;
-    transition: opacity 0.2s 0.05s ease-in-out;
+    width: 0; /* El texto no ocupa espacio cuando está colapsado */
+    overflow: hidden; /* Oculta el texto para que no desborde */
+    transition: opacity 0.2s ease-in-out, width 0.2s ease-in-out;
 }
 
 .sidebar_container:hover .sidebar_text {
     opacity: 1;
+    width: auto; /* El texto recupera su ancho al expandir */
+    margin-left: 22px; /* Añade separación con el ícono solo al expandir */
 }
 
 .sidebar_footer {
