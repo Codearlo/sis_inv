@@ -1,15 +1,16 @@
 <style>
-    /* Estilos encapsulados para el Sidebar Flotante - Tema Oscuro */
+    /* Estilos encapsulados para el Sidebar Flotante - Tema Claro */
     .sidebar {
         width: 80px; /* Ancho encogido */
-        height: calc(100vh - 20px); /* Altura ajustada para el margen */
+        height: calc(100vh - 20px);
         position: fixed;
-        top: 10px; /* Margen superior para el efecto flotante */
-        left: 10px; /* Margen izquierdo para el efecto flotante */
+        top: 10px;
+        left: 10px;
         
-        background-color: #1A1D21; /* Fondo oscuro del sidebar */
-        border-radius: 18px; /* Bordes redondeados */
-        border: 1px solid #2A2E33;
+        background-color: #FFFFFF; /* Fondo blanco */
+        border-radius: 18px;
+        border: 1px solid #E5E7EB; /* Borde gris claro */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra suave para flotar */
 
         display: flex;
         flex-direction: column;
@@ -20,7 +21,7 @@
     }
 
     .sidebar:hover {
-        width: 280px; /* Ancho expandido */
+        width: 280px;
     }
 
     .sidebar-header {
@@ -30,11 +31,11 @@
         min-height: 70px;
         font-size: 1.2rem;
         font-weight: 600;
-        color: #FFFFFF;
+        color: #111827; /* Texto oscuro */
     }
     
     .sidebar-header .sidebar-icon {
-        color: #3B82F6; /* Azul brillante para el logo */
+        color: #6D28D9; /* Morado para el logo */
     }
 
     .sidebar-nav {
@@ -42,35 +43,39 @@
         display: flex;
         flex-direction: column;
         padding: 10px 0;
-        border-top: 1px solid #2A2E33;
+        border-top: 1px solid #F3F4F6; /* Separador muy sutil */
     }
 
     .sidebar .nav-item {
         display: flex;
         align-items: center;
         text-decoration: none;
-        color: #A0AEC0; /* Texto gris claro */
+        color: #4B5563; /* Texto gris oscuro */
         padding: 14px 28px;
         margin: 4px 12px;
-        border-radius: 8px;
+        border-radius: 10px; /* Bordes más suaves */
         font-weight: 500;
         transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
     }
 
     .sidebar .nav-item:hover {
-        background-color: #252A2F;
-        color: #FFFFFF; /* Texto blanco al pasar el cursor */
+        background-color: #F5F3FF; /* Fondo morado muy claro */
+        color: #5B21B6; /* Morado oscuro al pasar el cursor */
     }
     
     .sidebar .nav-item.active {
-        background-color: #2563EB; /* Azul más intenso para el activo */
+        background-color: #6D28D9; /* Morado principal para el activo */
         color: #FFFFFF;
         font-weight: 600;
     }
     
+    /* Para que el ícono activo y en hover se vea bien */
     .sidebar .nav-item.active .sidebar-icon,
     .sidebar .nav-item.active:hover .sidebar-icon {
         color: #FFFFFF;
+    }
+    .sidebar .nav-item:hover .sidebar-icon {
+        color: #5B21B6;
     }
 
     .sidebar-icon {
@@ -79,7 +84,7 @@
         justify-content: center;
         min-width: 24px;
         margin-right: 22px;
-        color: #718096; /* Color de íconos */
+        color: #6B7280;
         transition: color 0.2s ease-in-out;
     }
 
@@ -94,8 +99,21 @@
 
     .sidebar-footer {
         padding: 20px 0;
-        border-top: 1px solid #2A2E33;
+        border-top: 1px solid #F3F4F6;
     }
+    
+    /* Estilos específicos para Cerrar Sesión */
+    .sidebar .logout-item {
+        color: #EF4444; /* Rojo bajito */
+    }
+    .sidebar .logout-item:hover {
+        background-color: #FEE2E2; /* Fondo rojo muy claro */
+        color: #B91C1C; /* Rojo fuerte */
+    }
+    .sidebar .logout-item:hover .sidebar-icon {
+        color: #B91C1C; /* Ícono en rojo fuerte */
+    }
+
 </style>
 
 <div class="sidebar">
@@ -132,7 +150,7 @@
         </a>
     </nav>
     <div class="sidebar-footer">
-        <a href="logout.php" class="nav-item">
+        <a href="logout.php" class="nav-item logout-item">
             <span class="sidebar-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
             </span>
