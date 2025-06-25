@@ -1,6 +1,6 @@
-/* Estilos específicos para el componente Sidebar - v1.4 */
+/* Estilos específicos para el componente Sidebar con Tooltip */
 .sidebar_container {
-    width: 80px;
+    width: 80px; /* Ancho fijo */
     height: calc(100vh - 20px);
     position: fixed;
     top: 10px;
@@ -11,10 +11,21 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
-    white-space: nowrap;
     z-index: 1000;
+    /* Ya no hay transición de ancho */
+}
+
+.sidebar_header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Ícono siempre centrado */
+    padding: 22px 0;
+    min-height: 70px;
+    flex-shrink: 0;
+}
+
+.sidebar_header .sidebar_icon {
+    color: #6D28D9;
 }
 
 .sidebar_nav {
@@ -25,66 +36,34 @@
     border-top: 1px solid #F3F4F6;
 }
 
-/* --- ESTADO COLAPSADO (Definido explícitamente) --- */
-.sidebar_container:not(.is-expanded) .sidebar_header,
-.sidebar_container:not(.is-expanded) .sidebar_nav-item {
-    justify-content: center;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-.sidebar_container:not(.is-expanded) .sidebar_text {
-    width: 0;
-    opacity: 0;
-    margin-left: 0;
-}
-
-/* --- ESTADO EXPANDIDO --- */
-.sidebar_container.is-expanded {
-    width: 280px;
-}
-
-.sidebar_container.is-expanded .sidebar_header,
-.sidebar_container.is-expanded .sidebar_nav-item {
-    justify-content: flex-start;
-    padding-left: 28px;
-    padding-right: 28px;
-}
-
-.sidebar_container.is-expanded .sidebar_text {
-    opacity: 1;
-    width: auto;
-    margin-left: 22px;
-}
-
-/* --- ESTILOS GENERALES (comunes a ambos estados) --- */
-.sidebar_header {
-    display: flex;
-    align-items: center;
-    min-height: 70px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #111827;
-    flex-shrink: 0;
-    transition: justify-content 0.3s, padding 0.3s;
-}
-
 .sidebar_nav-item {
     display: flex;
     align-items: center;
+    justify-content: center; /* Íconos siempre centrados */
     text-decoration: none;
     color: #4B5563;
-    padding-top: 14px;
-    padding-bottom: 14px;
+    height: 52px;
     margin: 4px 12px;
     border-radius: 10px;
-    font-weight: 500;
-    transition: background-color 0.2s, color 0.2s, padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    position: relative; /* Necesario para posicionar el tooltip */
 }
 
-.sidebar_text {
-    transition: opacity 0.2s ease-out, width 0.2s ease-out, margin-left 0.2s ease-out;
-    white-space: nowrap;
+.sidebar_nav-item:hover {
+    background-color: #F5F3FF;
+}
+
+.sidebar_nav-item.active {
+    background-color: #6D28D9;
+    color: #FFFFFF;
+}
+
+.sidebar_nav-item.active .sidebar_icon,
+.sidebar_nav-item.active:hover .sidebar_icon {
+    color: #FFFFFF;
+}
+.sidebar_nav-item:hover .sidebar_icon {
+    color: #5B21B6;
 }
 
 .sidebar_icon {
@@ -94,17 +73,51 @@
     min-width: 24px;
     color: #6B7280;
     transition: color 0.2s ease-in-out;
-    flex-shrink: 0;
 }
 
-/* Colores y otros */
-.sidebar_header .sidebar_icon { color: #6D28D9; }
-.sidebar_nav-item:hover { background-color: #F5F3FF; color: #5B21B6; }
-.sidebar_nav-item.active { background-color: #6D28D9; color: #FFFFFF; font-weight: 600; }
-.sidebar_nav-item.active .sidebar_icon,
-.sidebar_nav-item.active:hover .sidebar_icon { color: #FFFFFF; }
-.sidebar_nav-item:hover .sidebar_icon { color: #5B21B6; }
-.sidebar_footer { padding: 20px 0; border-top: 1px solid #F3F4F6; margin-top: auto; }
-.sidebar_logout-item { color: #EF4444; }
-.sidebar_logout-item:hover { background-color: #FEE2E2; color: #B91C1C; }
-.sidebar_logout-item:hover .sidebar_icon { color: #B91C1C; }
+/* --- LÓGICA DEL TOOLTIP --- */
+.sidebar_text {
+    position: absolute;
+    left: 85px; /* Posición a la derecha del sidebar */
+    
+    background-color: #1F2937; /* Fondo oscuro para el tooltip */
+    color: #FFFFFF;
+    padding: 6px 12px;
+    border-radius: 7px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    
+    /* Oculto por defecto */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-10px); /* Efecto de aparición */
+    
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    pointer-events: none; /* Para que no interfiera con el cursor */
+}
+
+/* Mostrar tooltip al pasar el cursor sobre el nav-item */
+.sidebar_nav-item:hover .sidebar_text {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    transition-delay: 0.2s; /* Pequeño retraso para que no aparezca instantáneamente */
+}
+
+
+.sidebar_footer {
+    padding: 20px 0;
+    border-top: 1px solid #F3F4F6;
+    margin-top: auto;
+}
+
+.sidebar_logout-item {
+    color: #EF4444;
+}
+.sidebar_logout-item:hover {
+    background-color: #FEE2E2;
+}
+.sidebar_logout-item:hover .sidebar_icon {
+    color: #B91C1C;
+}
