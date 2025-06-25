@@ -1,3 +1,84 @@
+<style>
+    /* Estilos encapsulados para el Sidebar */
+    .sidebar {
+        width: 80px; /* Ancho encogido */
+        background-color: #ffffff;
+        border-right: 1px solid #e5e5e5;
+        height: 100vh;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+        overflow: hidden;
+        white-space: nowrap;
+        z-index: 1000;
+    }
+
+    .sidebar:hover {
+        width: 260px; /* Ancho expandido */
+    }
+
+    .sidebar-header {
+        display: flex;
+        align-items: center;
+        padding: 22px 26px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #000;
+    }
+
+    .sidebar-nav {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 10px 0;
+    }
+
+    .sidebar .nav-item {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #333;
+        padding: 14px 28px;
+        margin: 4px 12px;
+        border-radius: 8px;
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    }
+
+    .sidebar .nav-item:hover {
+        background-color: #f0f0f0;
+        color: #007aff;
+    }
+    
+    .sidebar .nav-item.active {
+        background-color: #007aff;
+        color: #fff;
+    }
+    
+    .sidebar .nav-item.active:hover {
+        color: #fff;
+    }
+
+    .sidebar-icon {
+        display: inline-block;
+        min-width: 24px;
+        margin-right: 20px;
+    }
+
+    .sidebar-text {
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .sidebar:hover .sidebar-text {
+        opacity: 1;
+    }
+
+    .sidebar-footer {
+        padding-bottom: 20px;
+    }
+</style>
+
 <div class="sidebar">
     <div class="sidebar-header">
         <span class="sidebar-icon">
