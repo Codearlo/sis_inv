@@ -1,47 +1,67 @@
 /* Estilos específicos para el componente Dashboard */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    background-color: #f4f7fa;
-    color: #333;
+    background-color: #f9fafb; /* Un fondo ligeramente más cálido */
+    color: #111827;
 }
  
 .dashboard_main-content {
-    margin-left: 110px;
+    margin-left: 100px; /* Ajustado al ancho del sidebar */
     flex-grow: 1;
-    padding: 30px;
+    padding: 25px;
 }
 
-.dashboard_main-content header h1 {
-    margin-bottom: 20px;
-    color: #111827;
-    font-size: 1.8rem;
+.dashboard_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.dashboard_welcome h1 {
+    font-size: 1.75rem;
     font-weight: 700;
+    color: #111827;
+}
+
+.dashboard_welcome p {
+    font-size: 1rem;
+    color: #6B7280;
+}
+
+.dashboard_stats-container {
+    margin-bottom: 30px;
+}
+
+.dashboard_stats-container h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 15px;
 }
 
 .dashboard_cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
-    margin-bottom: 30px;
 }
 
 .dashboard_card {
     background-color: #fff;
-    padding: 25px;
-    border-radius: 16px;
-    border: 1px solid #F3F4F6; /* Borde más sutil */
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
     text-align: left;
 }
 
 .dashboard_card h3 {
-    margin-bottom: 10px;
-    font-size: 0.9em;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
     font-weight: 500;
     color: #6B7280;
 }
 
 .dashboard_card p {
-    font-size: 2em;
+    font-size: 2rem;
     font-weight: 700;
     color: #111827;
 }
@@ -49,27 +69,28 @@ body {
 .dashboard_tables-container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 25px;
+    margin-bottom: 30px;
 }
 
 @media (min-width: 1200px) {
     .dashboard_tables-container {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1.5fr 1fr;
     }
 }
 
 .dashboard_table-wrapper {
     background-color: #fff;
     padding: 20px;
-    border-radius: 16px;
-    border: 1px solid #F3F4F6;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
     overflow-x: auto;
 }
 
 .dashboard_table-wrapper h2 {
     margin-bottom: 15px;
     color: #111827;
-    font-size: 1.2em;
+    font-size: 1.1rem;
     font-weight: 600;
 }
 
@@ -83,9 +104,9 @@ body {
 }
 
 .dashboard_table-wrapper th {
-    padding: 12px 15px;
+    padding: 10px 15px;
     text-align: left;
-    font-size: 0.85em;
+    font-size: 0.8rem;
     font-weight: 600;
     color: #6B7280;
     text-transform: uppercase;
@@ -93,10 +114,11 @@ body {
 }
 
 .dashboard_table-wrapper td {
-    padding: 15px;
+    padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #F3F4F6;
     color: #374151;
+    font-size: 0.9rem;
 }
 
 .dashboard_table-wrapper tbody tr:last-child td {
@@ -104,6 +126,46 @@ body {
 }
 
 .dashboard_low-stock {
-    color: #EF4444; /* Rojo para alertas */
+    color: #EF4444;
     font-weight: 600;
+}
+
+.dashboard_promo-card {
+    background-color: #1F2937;
+    color: #FFFFFF;
+    border-radius: 12px;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.promo_text h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.promo_text p {
+    color: #D1D5DB;
+    margin-bottom: 15px;
+    max-width: 400px;
+}
+
+.promo_button {
+    background-color: #FFFFFF;
+    color: #1F2937;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.promo_button:hover {
+    background-color: #E5E7EB;
+}
+
+.promo_icon svg {
+    color: #4F46E5;
 }
