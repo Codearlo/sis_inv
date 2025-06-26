@@ -6,7 +6,7 @@ body {
 }
  
 .dashboard_main-content {
-    margin-left: 100px; /* Ajustado al ancho del sidebar */
+    margin-left: 110px; /* CORREGIDO: Ajustado para consistencia */
     flex-grow: 1;
     padding: 25px;
 }
