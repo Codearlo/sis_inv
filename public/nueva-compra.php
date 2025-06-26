@@ -44,7 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Nueva Compra - Inventario</title>
     <link rel="stylesheet" href="css/sidebar_styles.css?v=1.6">
-    <link rel="stylesheet" href="css/form_styles.css?v=1.0"> </head>
+    <link rel="stylesheet" href="css/form_styles.css?v=1.0"> 
+    <link rel="stylesheet" href="css/styles.css?">
+</head>
 <body>
     <?php require_once 'parts/sidebar.php'; ?>
 

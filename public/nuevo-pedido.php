@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Nuevo Pedido - Inventario</title>
     <link rel="stylesheet" href="css/sidebar_styles.css?v=1.7">
     <link rel="stylesheet" href="css/form_styles.css?v=1.1">
+    <link rel="stylesheet" href="css/styles.css?">
 </head>
 <body>
     <?php require_once 'parts/sidebar.php'; ?>

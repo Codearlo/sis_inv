@@ -29,6 +29,7 @@ $pedidos = $getPedidos->execute();
     <title>Gestión de Pedidos - Inventario</title>
     <link rel="stylesheet" href="css/sidebar_styles.css?v=1.7">
     <link rel="stylesheet" href="css/pedidos_styles.css?v=1.0"> </head>
+    <link rel="stylesheet" href="css/styles.css?">
 <body>
     <?php require_once 'parts/sidebar.php'; ?>
 
