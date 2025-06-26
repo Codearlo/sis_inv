@@ -17,8 +17,8 @@ $active_page = 'dashboard';
 $getDashboardData = new GetDashboardData($pdo);
 $dashboardData = $getDashboardData->execute();
 
-// Ejemplo de nombre de usuario, en una app real vendría de la sesión/BD
-$nombreUsuario = 'Josh';
+// Se obtiene el nombre del usuario desde la sesión
+$nombreUsuario = $_SESSION['usuario_nombre'] ?? 'Usuario';
 
 ?>
 
