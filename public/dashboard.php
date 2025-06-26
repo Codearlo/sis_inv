@@ -11,7 +11,7 @@ if (!$auth->estaAutenticado()) {
     exit;
 }
 
-// Marcador para el sidebar
+// Marcador para que el sidebar sepa qué enlace resaltar
 $active_page = 'dashboard';
 
 $getDashboardData = new GetDashboardData($pdo);
@@ -23,7 +23,7 @@ $dashboardData = $getDashboardData->execute();
 <head>
     <meta charset="UTF-8">
     <title>Dashboard - Inventario</title>
-    <link rel="stylesheet" href="css/sidebar_styles.css?v=1.6">
+    <link rel="stylesheet" href="css/sidebar_styles.css?v=1.7">
     <link rel="stylesheet" href="css/dashboard_styles.css?v=1.5">
 </head>
 <body>
@@ -107,5 +107,6 @@ $dashboardData = $getDashboardData->execute();
             </div>
         </div>
     </div>
-</body>
+    
+    </body>
 </html>
