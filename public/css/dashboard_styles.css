@@ -6,7 +6,7 @@ body {
 }
  
 .dashboard_main-content {
-    margin-left: 110px; /* CORREGIDO: Ajustado para consistencia */
+    margin-left: 110px;
     flex-grow: 1;
     padding: 25px;
 }
@@ -14,19 +14,30 @@ body {
 .dashboard_header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center; /* Centrado vertical para mejor alineación */
     margin-bottom: 30px;
+    gap: 20px; /* Añade un espacio entre el saludo y las acciones */
+}
+
+.dashboard_welcome {
+    flex: 1; /* Permite que el contenedor del saludo ocupe el espacio disponible */
+    min-width: 0; /* PERMITE QUE EL CONTENEDOR SE ENCOJA, clave para la solución */
 }
 
 .dashboard_welcome h1 {
     font-size: 1.75rem;
     font-weight: 700;
     color: #111827;
+    /* --- INICIO DE LA CORRECCIÓN CLAVE --- */
+    white-space: nowrap;      /* Evita que el texto se parta en varias líneas */
+    overflow: hidden;         /* Oculta el texto que se desborda */
+    text-overflow: ellipsis;  /* Muestra "..." cuando el texto es muy largo */
 }
 
 .dashboard_welcome p {
     font-size: 1rem;
     color: #6B7280;
+    margin-top: 4px;
 }
 
 .dashboard_stats-container {
