@@ -23,13 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Login</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-<h2>Iniciar Sesión</h2>
-<?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
-<form method="POST">
-    <input type="email" name="email" placeholder="Correo" required><br>
-    <input type="password" name="contrasena" placeholder="Contraseña" required><br>
-    <button type="submit">Entrar</button>
-</form>
+<body class="auth-layout">
+<div class="container">
+    <h2>Iniciar Sesión</h2>
+    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+    <form method="POST">
+        <input type="email" name="email" placeholder="Correo" required><br>
+        <input type="password" name="contrasena" placeholder="Contraseña" required><br>
+        <button type="submit">Entrar</button>
+    </form>
+</div>
 </body>
 </html>

@@ -52,25 +52,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Registro de Usuario</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-    <h2>Crear Cuenta</h2>
+<body class="auth-layout">
+    <div class="container">
+        <h2>Crear Cuenta</h2>
 
-    <?php foreach ($errores as $error): ?>
-        <p style="color:red;"><?php echo $error; ?></p>
-    <?php endforeach; ?>
+        <?php foreach ($errores as $error): ?>
+            <p style="color:red;"><?php echo $error; ?></p>
+        <?php endforeach; ?>
 
-    <?php if ($mensaje): ?>
-        <p style="color:green;"><?php echo $mensaje; ?></p>
-    <?php endif; ?>
+        <?php if ($mensaje): ?>
+            <p style="color:green;"><?php echo $mensaje; ?></p>
+        <?php endif; ?>
 
-    <form method="POST">
-        <input type="text" name="nombre" placeholder="Nombre completo" required><br>
-        <input type="email" name="email" placeholder="Correo electrónico" required><br>
-        <input type="password" name="contrasena" placeholder="Contraseña" required><br>
-        <input type="password" name="confirmar_contrasena" placeholder="Confirmar contraseña" required><br>
-        <button type="submit">Registrar</button>
-    </form>
+        <form method="POST">
+            <input type="text" name="nombre" placeholder="Nombre completo" required><br>
+            <input type="email" name="email" placeholder="Correo electrónico" required><br>
+            <input type="password" name="contrasena" placeholder="Contraseña" required><br>
+            <input type="password" name="confirmar_contrasena" placeholder="Confirmar contraseña" required><br>
+            <button type="submit">Registrar</button>
+        </form>
 
-    <p>¿Ya tienes cuenta? <a href="login.php">Inicia sesión aquí</a></p>
+        <p>¿Ya tienes cuenta? <a href="login.php">Inicia sesión aquí</a></p>
+    </div>
 </body>
 </html>
