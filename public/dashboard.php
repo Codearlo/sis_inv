@@ -37,7 +37,6 @@ $nombreUsuario = $_SESSION['usuario_nombre'] ?? 'Usuario';
         <header class="dashboard_header">
             <div class="dashboard_welcome">
                 <h1>Hola, <?php echo htmlspecialchars($nombreUsuario); ?>!</h1>
-                <p>Es un gusto verte de nuevo.</p>
             </div>
             <div class="dashboard_header-actions">
                 </div>
