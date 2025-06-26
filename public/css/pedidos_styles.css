@@ -12,12 +12,13 @@
 }
 
 .pedidos_header h1 {
-    color: #1d1d1f;
-    font-weight: 600;
+    color: #111827;
+    font-size: 1.8rem;
+    font-weight: 700;
 }
 
 .pedidos_button-new {
-    background-color: #6D28D9;
+    background-color: #111827; /* Botón principal negro */
     color: #fff;
     padding: 10px 20px;
     border-radius: 8px;
@@ -26,14 +27,14 @@
     transition: background-color 0.2s;
 }
 .pedidos_button-new:hover {
-    background-color: #5B21B6;
+    background-color: #374151; /* Hover más oscuro */
 }
 
 .pedidos_table-container {
     background-color: #fff;
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 20px;
-    border: 1px solid #e5e5e5;
+    border: 1px solid #F3F4F6;
     overflow-x: auto;
 }
 
@@ -45,17 +46,18 @@
 .pedidos_table-container th {
     padding: 12px 15px;
     text-align: left;
-    font-size: 0.9em;
+    font-size: 0.85em;
     font-weight: 600;
-    color: #374151;
-    border-bottom: 2px solid #e5e7eb;
+    color: #6B7280;
+    border-bottom: 1px solid #E5E7EB;
+    text-transform: uppercase;
     white-space: nowrap;
 }
 
 .pedidos_table-container td {
     padding: 15px;
     border-bottom: 1px solid #f3f4f6;
-    color: #4b5563;
+    color: #374151;
 }
 
 .pedidos_table-container tbody tr:last-child td {

@@ -6,15 +6,16 @@
 
 .form_main-content header h1 {
     margin-bottom: 20px;
-    color: #1d1d1f;
-    font-weight: 600;
+    color: #111827;
+    font-weight: 700;
+    font-size: 1.8rem;
 }
 
 .form_container {
     background-color: #fff;
     padding: 30px 40px;
-    border-radius: 12px;
-    border: 1px solid #e5e5e5;
+    border-radius: 16px;
+    border: 1px solid #F3F4F6;
     max-width: 700px;
 }
 
@@ -47,8 +48,8 @@
 .form_group input:focus,
 .form_group select:focus {
     outline: none;
-    border-color: #6D28D9;
-    box-shadow: 0 0 0 3px #F5F3FF;
+    border-color: #111827; /* Color de foco negro */
+    box-shadow: 0 0 0 3px #E5E7EB; /* Sombra de foco gris */
 }
 
 .form_radio-group {
@@ -76,13 +77,13 @@
     margin-right: 10px;
     height: 18px;
     width: 18px;
-    accent-color: #6D28D9;
+    accent-color: #111827; /* Checkbox negro */
 }
 
 .form_button {
     width: 100%;
     padding: 14px;
-    background-color: #6D28D9;
+    background-color: #111827; /* Botón negro */
     color: white;
     border: none;
     font-size: 1rem;
@@ -93,7 +94,7 @@
 }
 
 .form_button:hover {
-    background-color: #5B21B6;
+    background-color: #374151;
 }
 
 .form_message {

@@ -5,14 +5,11 @@
     position: fixed;
     top: 10px;
     left: 10px;
-    background-color: #FFFFFF;
+    background-color: #111827; /* Fondo oscuro */
     border-radius: 18px;
-    border: 1px solid #E5E7EB;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
     z-index: 1000;
-    /* Ya no hay transición de ancho */
 }
 
 .sidebar_header {
@@ -25,7 +22,7 @@
 }
 
 .sidebar_header .sidebar_icon {
-    color: #6D28D9;
+    color: #FFFFFF; /* Ícono de header blanco */
 }
 
 .sidebar_nav {
@@ -33,7 +30,6 @@
     display: flex;
     flex-direction: column;
     padding: 10px 0;
-    border-top: 1px solid #F3F4F6;
 }
 
 .sidebar_nav-item {
@@ -41,7 +37,7 @@
     align-items: center;
     justify-content: center; /* Íconos siempre centrados */
     text-decoration: none;
-    color: #4B5563;
+    color: #9CA3AF; /* Color de íconos inactivos */
     height: 52px;
     margin: 4px 12px;
     border-radius: 10px;
@@ -50,20 +46,21 @@
 }
 
 .sidebar_nav-item:hover {
-    background-color: #F5F3FF;
+    background-color: #1F2937; /* Fondo sutil en hover */
+    color: #FFFFFF;
 }
 
 .sidebar_nav-item.active {
-    background-color: #6D28D9;
-    color: #FFFFFF;
+    background-color: #FFFFFF; /* Fondo blanco para el activo */
+    color: #111827; /* Ícono oscuro para el activo */
 }
 
 .sidebar_nav-item.active .sidebar_icon,
 .sidebar_nav-item.active:hover .sidebar_icon {
-    color: #FFFFFF;
+    color: #111827;
 }
 .sidebar_nav-item:hover .sidebar_icon {
-    color: #5B21B6;
+    color: #FFFFFF;
 }
 
 .sidebar_icon {
@@ -71,7 +68,7 @@
     align-items: center;
     justify-content: center;
     min-width: 24px;
-    color: #6B7280;
+    color: #9CA3AF; /* Color base de íconos */
     transition: color 0.2s ease-in-out;
 }
 
@@ -105,18 +102,17 @@
     transition-delay: 0.2s; /* Pequeño retraso para que no aparezca instantáneamente */
 }
 
-
 .sidebar_footer {
     padding: 20px 0;
-    border-top: 1px solid #F3F4F6;
     margin-top: auto;
 }
 
-.sidebar_logout-item {
-    color: #EF4444;
+/* Se quita el color rojo para el logout para mantener la consistencia */
+.sidebar_logout-item .sidebar_icon {
+    color: #9CA3AF;
 }
 .sidebar_logout-item:hover {
-    background-color: #FEE2E2;
+    background-color: #FEF2F2; /* Un rojo muy claro para indicar acción destructiva */
 }
 .sidebar_logout-item:hover .sidebar_icon {
     color: #B91C1C;
