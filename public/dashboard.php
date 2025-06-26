@@ -17,9 +17,6 @@ $active_page = 'dashboard';
 $getDashboardData = new GetDashboardData($pdo);
 $dashboardData = $getDashboardData->execute();
 
-// Se obtiene el nombre del usuario desde la sesión
-$nombreUsuario = $_SESSION['usuario_nombre'] ?? 'Usuario';
-
 ?>
 
 <!DOCTYPE html>
@@ -28,16 +25,13 @@ $nombreUsuario = $_SESSION['usuario_nombre'] ?? 'Usuario';
     <meta charset="UTF-8">
     <title>Dashboard - Inventario</title>
     <link rel="stylesheet" href="css/sidebar_styles.css?v=1.8">
-    <link rel="stylesheet" href="css/dashboard_styles.css?v=1.6">
+    <link rel="stylesheet" href="css/dashboard_styles.css?v=1.7">
 </head>
 <body>
     <?php require_once 'parts/sidebar.php'; ?>
 
     <div class="dashboard_main-content">
         <header class="dashboard_header">
-            <div class="dashboard_welcome">
-                <h1>Hola, <?php echo htmlspecialchars($nombreUsuario); ?>!</h1>
-            </div>
             <div class="dashboard_header-actions">
                 </div>
         </header>
