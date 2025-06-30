@@ -1,8 +1,9 @@
 <?php
 require_once '../config/database.php';
 require_once '../app/Infrastructure/Auth/AuthService.php';
-// Este UseCase se creará en un paso posterior
-// require_once '../app/Pedidos/UseCase/GetPedidos.php'; 
+require_once '../app/Pedidos/UseCase/GetPedidos.php'; 
+
+use App\Pedidos\UseCase\GetPedidos;
 
 $auth = new AuthService($pdo);
 if (!$auth->estaAutenticado()) {
@@ -10,32 +11,46 @@ if (!$auth->estaAutenticado()) {
     exit;
 }
 
+// Verificar si necesita onboarding
+if ($auth->necesitaOnboarding()) {
+    header("Location: onboarding.php");
+    exit;
+}
+
 // Marcador para que el sidebar sepa qué enlace resaltar
 $active_page = 'pedidos';
 
-// --- Lógica para obtener los pedidos (se implementará más adelante) ---
-// Por ahora, usamos un array vacío para que la página no de error.
-$pedidos = [];
-/*
-$getPedidos = new App\Pedidos\UseCase\GetPedidos($pdo);
-$pedidos = $getPedidos->execute();
-*/
+$negocioActivo = $auth->getNegocioActivo();
+if (!$negocioActivo) {
+    header("Location: onboarding.php");
+    exit;
+}
+
+// Obtener pedidos del negocio activo
+$getPedidos = new GetPedidos($pdo);
+$pedidos = $getPedidos->execute($negocioActivo['id']);
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Pedidos - Inventario</title>
-    <link rel="stylesheet" href="css/sidebar_styles.css?v=1.7">
-    <link rel="stylesheet" href="css/pedidos_styles.css?v=1.0"> </head>
-    <link rel="stylesheet" href="css/styles.css?">
+    <title>Gestión de Pedidos - <?php echo htmlspecialchars($negocioActivo['nombre']); ?></title>
+    <link rel="stylesheet" href="css/sidebar_styles.css?v=1.9">
+    <link rel="stylesheet" href="css/pedidos_styles.css?v=1.1">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
 <body>
     <?php require_once 'parts/sidebar.php'; ?>
 
     <div class="pedidos_main-content">
         <header class="pedidos_header">
-            <h1>Gestión de Pedidos</h1>
+            <div>
+                <h1>Gestión de Pedidos</h1>
+                <p style="color: #6B7280; margin-top: 5px;">
+                    Negocio: <?php echo htmlspecialchars($negocioActivo['nombre']); ?>
+                </p>
+            </div>
             <a href="nuevo-pedido.php" class="pedidos_button-new">Nuevo Pedido</a>
         </header>
 
@@ -75,7 +90,16 @@ $pedidos = $getPedidos->execute();
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="9">No hay pedidos registrados. ¡Añade uno nuevo para empezar!</td>
+                            <td colspan="9" style="text-align: center; padding: 40px; color: #6B7280;">
+                                <div style="display: flex; flex-direction: column; align-items: center;">
+                                    <div style="font-size: 48px; margin-bottom: 16px;">📦</div>
+                                    <h3 style="margin-bottom: 8px; color: #374151;">No hay pedidos registrados</h3>
+                                    <p style="margin-bottom: 20px;">Este negocio aún no tiene pedidos. ¡Añade uno nuevo para empezar!</p>
+                                    <a href="nuevo-pedido.php" style="background: #111827; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 500;">
+                                        Crear Primer Pedido
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
                     <?php endif; ?>
                 </tbody>

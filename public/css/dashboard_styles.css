@@ -12,12 +12,15 @@ body {
 }
 
 .dashboard_header {
-    /* Se simplifica el header, ahora solo es un contenedor */
-    height: 60px; /* Le damos una altura fija para mantener el espacio */
     margin-bottom: 30px;
 }
 
-/* Las reglas para .dashboard_welcome y .dashboard_welcome h1 han sido eliminadas */
+.dashboard_welcome h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 5px;
+}
 
 .dashboard_stats-container {
     margin-bottom: 30px;
@@ -158,4 +161,41 @@ body {
 
 .promo_icon svg {
     color: #4F46E5;
+}
+
+/* Estilos para estado vacío */
+.dashboard_empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6B7280;
+}
+
+.dashboard_empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.dashboard_empty-state h3 {
+    color: #374151;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.dashboard_empty-state p {
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.dashboard_empty-state a {
+    background: #111827;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.dashboard_empty-state a:hover {
+    background: #374151;
 }

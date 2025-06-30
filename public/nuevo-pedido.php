@@ -1,9 +1,11 @@
 <?php
 require_once '../config/database.php';
 require_once '../app/Infrastructure/Auth/AuthService.php';
-// Estos UseCases se crearán en pasos posteriores
-// require_once '../app/Pedidos/UseCase/RegistrarPedido.php';
-// require_once '../app/Cuentas/UseCase/GetCuentas.php';
+require_once '../app/Pedidos/UseCase/RegistrarPedido.php';
+require_once '../app/Cuentas/UseCase/GetCuentas.php';
+
+use App\Pedidos\UseCase\RegistrarPedido;
+use App\Cuentas\UseCase\GetCuentas;
 
 $auth = new AuthService($pdo);
 if (!$auth->estaAutenticado()) {
@@ -11,21 +13,28 @@ if (!$auth->estaAutenticado()) {
     exit;
 }
 
+// Verificar si necesita onboarding
+if ($auth->necesitaOnboarding()) {
+    header("Location: onboarding.php");
+    exit;
+}
+
 $active_page = 'pedidos';
 $mensaje = '';
 $tipo_mensaje = '';
 
-// --- Lógica para obtener las cuentas financieras (se implementará más adelante) ---
-$cuentas = [];
-/*
-$getCuentas = new App\Cuentas\UseCase\GetCuentas($pdo);
-$cuentas = $getCuentas->execute();
-*/
+$negocioActivo = $auth->getNegocioActivo();
+if (!$negocioActivo) {
+    header("Location: onboarding.php");
+    exit;
+}
 
+// Obtener cuentas financieras del negocio activo
+$getCuentas = new GetCuentas($pdo);
+$cuentas = $getCuentas->execute($negocioActivo['id']);
 
-// --- Lógica para registrar el pedido ---
+// Lógica para registrar el pedido
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    /*
     $datos = [
         'producto' => $_POST['producto'],
         'proveedor' => $_POST['proveedor'],
@@ -37,17 +46,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'cuenta_id' => $_POST['estado_pago'] === 'deuda' ? $_POST['cuenta_id'] : null,
     ];
 
-    $registrador = new App\Pedidos\UseCase\RegistrarPedido($pdo);
-    if ($registrador->ejecutar($datos)) {
+    $registrador = new RegistrarPedido($pdo);
+    if ($registrador->ejecutar($datos, $negocioActivo['id'])) {
         $mensaje = "Pedido registrado con éxito. <a href='pedidos.php'>Volver al listado</a>";
         $tipo_mensaje = "success";
     } else {
         $mensaje = "Error al registrar el pedido.";
         $tipo_mensaje = "error";
     }
-    */
-    $mensaje = "La lógica de registro aún no está implementada.";
-    $tipo_mensaje = "error";
 }
 ?>
 
@@ -55,10 +61,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Nuevo Pedido - Inventario</title>
-    <link rel="stylesheet" href="css/sidebar_styles.css?v=1.7">
-    <link rel="stylesheet" href="css/form_styles.css?v=1.1">
-    <link rel="stylesheet" href="css/styles.css?">
+    <title>Nuevo Pedido - <?php echo htmlspecialchars($negocioActivo['nombre']); ?></title>
+    <link rel="stylesheet" href="css/sidebar_styles.css?v=1.9">
+    <link rel="stylesheet" href="css/form_styles.css?v=1.3">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <?php require_once 'parts/sidebar.php'; ?>
@@ -66,6 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="form_main-content">
         <header>
             <h1>Registrar Nuevo Pedido</h1>
+            <p style="color: #6B7280; margin-top: 5px;">
+                Negocio: <?php echo htmlspecialchars($negocioActivo['nombre']); ?>
+            </p>
         </header>
 
         <div class="form_container">
@@ -123,11 +132,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php foreach($cuentas as $cuenta): ?>
                             <option value="<?php echo $cuenta['id']; ?>">
                                 <?php echo htmlspecialchars($cuenta['nombre_cuenta']); ?>
+                                <?php if ($cuenta['banco']): ?>
+                                    (<?php echo htmlspecialchars($cuenta['banco']); ?>)
+                                <?php endif; ?>
                             </option>
                         <?php endforeach; ?>
-                         <option value="1">Interbank Oro (Ejemplo)</option>
-                        <option value="2">BCP Préstamo (Ejemplo)</option>
                     </select>
+                    
+                    <?php if (empty($cuentas)): ?>
+                        <p style="color: #6B7280; font-size: 0.9rem; margin-top: 8px;">
+                            No hay cuentas financieras registradas en este negocio. 
+                            <a href="#" style="color: #111827; font-weight: 500;">Crear una cuenta</a>
+                        </p>
+                    <?php endif; ?>
                 </div>
                 
                 <button type="submit" class="form_button">Registrar Pedido</button>
