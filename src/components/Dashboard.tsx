@@ -137,7 +137,7 @@ export default function Dashboard() {
         {/* Low Stock Products */}
         <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
           <div className="p-6 border-b border-gray-200">
-            <h3 className="text-lg font-semibold text-gray-900">Productos con Bajo Stock (<5)</h3>
+            <h3 className="text-lg font-semibold text-gray-900">Productos con Bajo Stock (&lt;5)</h3>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
