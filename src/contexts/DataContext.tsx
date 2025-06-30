@@ -1,9 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
+import { useBusiness } from './BusinessContext'
 
 export interface Product {
   id: string
   name: string
   description?: string
+  businessId: string
 }
 
 export interface Order {
@@ -19,6 +21,7 @@ export interface Order {
   accountId?: string
   accountName?: string
   orderNumber: number
+  businessId: string
 }
 
 export interface Account {
@@ -26,13 +29,15 @@ export interface Account {
   name: string
   type: 'tarjeta' | 'prestamo'
   bank?: string
+  businessId: string
 }
 
 interface DataContextType {
   products: Product[]
   orders: Order[]
   accounts: Account[]
-  addOrder: (order: Omit<Order, 'id' | 'orderNumber'>) => void
+  addOrder: (order: Omit<Order, 'id' | 'orderNumber' | 'businessId'>) => void
+  addAccount: (account: Omit<Account, 'id' | 'businessId'>) => void
   getDashboardData: () => {
     totalProducts: number
     totalStock: number
@@ -44,63 +49,118 @@ interface DataContextType {
 const DataContext = createContext<DataContextType | undefined>(undefined)
 
 export function DataProvider({ children }: { children: React.ReactNode }) {
+  const { currentBusiness } = useBusiness()
   const [products, setProducts] = useState<Product[]>([])
   const [orders, setOrders] = useState<Order[]>([])
-  const [accounts] = useState<Account[]>([
-    { id: '1', name: 'Interbank Oro', type: 'tarjeta', bank: 'Interbank' },
-    { id: '2', name: 'BCP Préstamo', type: 'prestamo', bank: 'BCP' },
-    { id: '3', name: 'Scotiabank Clásica', type: 'tarjeta', bank: 'Scotiabank' }
-  ])
+  const [accounts, setAccounts] = useState<Account[]>([])
 
+  // Load data when business changes
   useEffect(() => {
-    // Load sample data
-    const sampleProducts: Product[] = [
-      { id: '1', name: 'Teclado Mecánico RGB', description: 'Teclado gaming con switches azules' },
-      { id: '2', name: 'Mouse Inalámbrico', description: 'Mouse ergonómico con sensor óptico' },
-      { id: '3', name: 'Monitor 24"', description: 'Monitor Full HD IPS' }
-    ]
+    if (!currentBusiness) return
 
-    const sampleOrders: Order[] = [
-      {
-        id: '1',
-        productId: '1',
-        productName: 'Teclado Mecánico RGB',
-        supplier: 'AliExpress',
-        purchaseDate: '2024-01-15',
-        receivedDate: '2024-01-20',
-        unitPrice: 45.50,
-        quantity: 10,
-        paymentStatus: 'pagado',
-        orderNumber: 1
-      },
-      {
-        id: '2',
-        productId: '2',
-        productName: 'Mouse Inalámbrico',
-        supplier: 'Amazon',
-        purchaseDate: '2024-01-16',
-        unitPrice: 25.00,
-        quantity: 5,
-        paymentStatus: 'deuda',
-        accountId: '1',
-        accountName: 'Interbank Oro',
-        orderNumber: 1
-      }
-    ]
+    const businessId = currentBusiness.id
+    
+    // Load products
+    const savedProducts = localStorage.getItem(`products_${businessId}`)
+    if (savedProducts) {
+      setProducts(JSON.parse(savedProducts))
+    } else {
+      // Create sample products for new business
+      const sampleProducts: Product[] = [
+        { 
+          id: '1', 
+          name: 'Teclado Mecánico RGB', 
+          description: 'Teclado gaming con switches azules',
+          businessId 
+        },
+        { 
+          id: '2', 
+          name: 'Mouse Inalámbrico', 
+          description: 'Mouse ergonómico con sensor óptico',
+          businessId 
+        },
+        { 
+          id: '3', 
+          name: 'Monitor 24"', 
+          description: 'Monitor Full HD IPS',
+          businessId 
+        }
+      ]
+      setProducts(sampleProducts)
+      localStorage.setItem(`products_${businessId}`, JSON.stringify(sampleProducts))
+    }
 
-    setProducts(sampleProducts)
-    setOrders(sampleOrders)
-  }, [])
+    // Load orders
+    const savedOrders = localStorage.getItem(`orders_${businessId}`)
+    if (savedOrders) {
+      setOrders(JSON.parse(savedOrders))
+    } else {
+      // Create sample orders for new business
+      const sampleOrders: Order[] = [
+        {
+          id: '1',
+          productId: '1',
+          productName: 'Teclado Mecánico RGB',
+          supplier: 'AliExpress',
+          purchaseDate: '2024-01-15',
+          receivedDate: '2024-01-20',
+          unitPrice: 45.50,
+          quantity: 10,
+          paymentStatus: 'pagado',
+          orderNumber: 1,
+          businessId
+        },
+        {
+          id: '2',
+          productId: '2',
+          productName: 'Mouse Inalámbrico',
+          supplier: 'Amazon',
+          purchaseDate: '2024-01-16',
+          unitPrice: 25.00,
+          quantity: 5,
+          paymentStatus: 'deuda',
+          accountId: '1',
+          accountName: 'Interbank Oro',
+          orderNumber: 1,
+          businessId
+        }
+      ]
+      setOrders(sampleOrders)
+      localStorage.setItem(`orders_${businessId}`, JSON.stringify(sampleOrders))
+    }
 
-  const addOrder = (orderData: Omit<Order, 'id' | 'orderNumber'>) => {
+    // Load accounts
+    const savedAccounts = localStorage.getItem(`accounts_${businessId}`)
+    if (savedAccounts) {
+      setAccounts(JSON.parse(savedAccounts))
+    } else {
+      // Create sample accounts for new business
+      const sampleAccounts: Account[] = [
+        { id: '1', name: 'Interbank Oro', type: 'tarjeta', bank: 'Interbank', businessId },
+        { id: '2', name: 'BCP Préstamo', type: 'prestamo', bank: 'BCP', businessId },
+        { id: '3', name: 'Scotiabank Clásica', type: 'tarjeta', bank: 'Scotiabank', businessId }
+      ]
+      setAccounts(sampleAccounts)
+      localStorage.setItem(`accounts_${businessId}`, JSON.stringify(sampleAccounts))
+    }
+  }, [currentBusiness])
+
+  const addOrder = (orderData: Omit<Order, 'id' | 'orderNumber' | 'businessId'>) => {
+    if (!currentBusiness) return
+
+    const businessId = currentBusiness.id
+
     // Check if product exists, if not create it
     let product = products.find(p => p.name.toLowerCase() === orderData.productName.toLowerCase())
     if (!product) {
       product = {
         id: Date.now().toString(),
-        name: orderData.productName
+        name: orderData.productName,
+        businessId
       }
-      setProducts(prev => [...prev, product!])
+      const updatedProducts = [...products, product]
+      setProducts(updatedProducts)
+      localStorage.setItem(`products_${businessId}`, JSON.stringify(updatedProducts))
     }
 
     // Calculate order number for the day
@@ -114,10 +174,28 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       id: Date.now().toString(),
       productId: product.id,
       orderNumber,
+      businessId,
       accountName: orderData.accountId ? accounts.find(a => a.id === orderData.accountId)?.name : undefined
     }
 
-    setOrders(prev => [...prev, newOrder])
+    const updatedOrders = [...orders, newOrder]
+    setOrders(updatedOrders)
+    localStorage.setItem(`orders_${businessId}`, JSON.stringify(updatedOrders))
+  }
+
+  const addAccount = (accountData: Omit<Account, 'id' | 'businessId'>) => {
+    if (!currentBusiness) return
+
+    const businessId = currentBusiness.id
+    const newAccount: Account = {
+      ...accountData,
+      id: Date.now().toString(),
+      businessId
+    }
+
+    const updatedAccounts = [...accounts, newAccount]
+    setAccounts(updatedAccounts)
+    localStorage.setItem(`accounts_${businessId}`, JSON.stringify(updatedAccounts))
   }
 
   const getDashboardData = () => {
@@ -158,6 +236,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       orders,
       accounts,
       addOrder,
+      addAccount,
       getDashboardData
     }}>
       {children}

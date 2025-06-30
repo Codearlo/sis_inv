@@ -1,17 +1,45 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useData } from '../contexts/DataContext'
-import { Package, Archive, AlertTriangle, Zap } from 'lucide-react'
+import { useBusiness } from '../contexts/BusinessContext'
+import { Package, Archive, AlertTriangle, Zap, Building2 } from 'lucide-react'
 
 export default function Dashboard() {
   const { getDashboardData } = useData()
+  const { currentBusiness } = useBusiness()
   const dashboardData = getDashboardData()
+
+  if (!currentBusiness) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center">
+          <Building2 className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+          <p className="text-gray-600">No hay negocio seleccionado</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-8">
+      {/* Business Header */}
+      <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <div className="flex items-center">
+          <div className="p-3 bg-gray-100 rounded-xl mr-4">
+            <Building2 className="h-8 w-8 text-gray-600" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">{currentBusiness.name}</h1>
+            {currentBusiness.description && (
+              <p className="text-gray-600 mt-1">{currentBusiness.description}</p>
+            )}
+          </div>
+        </div>
+      </div>
+
       {/* Stats Cards */}
       <div>
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">Tus Estadísticas</h2>
+        <h2 className="text-xl font-semibold text-gray-900 mb-6">Estadísticas del Negocio</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
             <div className="flex items-center">
@@ -109,7 +137,7 @@ export default function Dashboard() {
         {/* Low Stock Products */}
         <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
           <div className="p-6 border-b border-gray-200">
-            <h3 className="text-lg font-semibold text-gray-900">Productos con Bajo Stock (&lt;5)</h3>
+            <h3 className="text-lg font-semibold text-gray-900">Productos con Bajo Stock (<5)</h3>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -152,16 +180,19 @@ export default function Dashboard() {
       <div className="bg-gray-900 rounded-xl p-8 text-white">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-xl font-semibold mb-2">¡Aprende aún más!</h3>
+            <h3 className="text-xl font-semibold mb-2">¡Gestiona múltiples negocios!</h3>
             <p className="text-gray-300 mb-4 max-w-md">
-              Desbloquea funciones premium y lleva el control de tu inventario al siguiente nivel.
+              Puedes crear hasta 2 negocios independientes con datos completamente separados.
             </p>
-            <button className="bg-white text-gray-900 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-              Volverse Premium
-            </button>
+            <Link 
+              to="/negocios"
+              className="inline-block bg-white text-gray-900 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+            >
+              Gestionar Negocios
+            </Link>
           </div>
           <div className="hidden md:block">
-            <Zap className="h-16 w-16 text-blue-400" />
+            <Building2 className="h-16 w-16 text-blue-400" />
           </div>
         </div>
       </div>
