@@ -9,6 +9,12 @@ if (!$auth->estaAutenticado()) {
     exit;
 }
 
-// Redirigir al dashboard una vez autenticado
+// Verificar si necesita onboarding
+if ($auth->necesitaOnboarding()) {
+    header("Location: onboarding.php");
+    exit;
+}
+
+// Redirigir al dashboard una vez autenticado y configurado
 header("Location: dashboard.php");
 exit;

@@ -11,11 +11,23 @@ if (!$auth->estaAutenticado()) {
     exit;
 }
 
+// Verificar si necesita onboarding
+if ($auth->necesitaOnboarding()) {
+    header("Location: onboarding.php");
+    exit;
+}
+
 // Marcador para que el sidebar sepa qué enlace resaltar
 $active_page = 'dashboard';
 
+$negocioActivo = $auth->getNegocioActivo();
+if (!$negocioActivo) {
+    header("Location: onboarding.php");
+    exit;
+}
+
 $getDashboardData = new GetDashboardData($pdo);
-$dashboardData = $getDashboardData->execute();
+$dashboardData = $getDashboardData->execute($negocioActivo['id']);
 
 ?>
 
@@ -23,21 +35,30 @@ $dashboardData = $getDashboardData->execute();
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard - Inventario</title>
-    <link rel="stylesheet" href="css/sidebar_styles.css?v=1.8">
-    <link rel="stylesheet" href="css/dashboard_styles.css?v=1.7">
+    <title>Dashboard - <?php echo htmlspecialchars($negocioActivo['nombre']); ?></title>
+    <link rel="stylesheet" href="css/sidebar_styles.css?v=1.9">
+    <link rel="stylesheet" href="css/dashboard_styles.css?v=1.8">
 </head>
 <body>
     <?php require_once 'parts/sidebar.php'; ?>
 
     <div class="dashboard_main-content">
         <header class="dashboard_header">
-            <div class="dashboard_header-actions">
+            <div class="dashboard_welcome">
+                <h1>Dashboard - <?php echo htmlspecialchars($negocioActivo['nombre']); ?></h1>
+                <?php if ($negocioActivo['descripcion']): ?>
+                    <p style="color: #6B7280; margin-top: 5px;"><?php echo htmlspecialchars($negocioActivo['descripcion']); ?></p>
+                <?php endif; ?>
+                <div style="margin-top: 10px;">
+                    <span style="background: #F3F4F6; color: #374151; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem;">
+                        Código: <?php echo htmlspecialchars($negocioActivo['codigo_invitacion']); ?>
+                    </span>
                 </div>
+            </div>
         </header>
 
         <div class="dashboard_stats-container">
-            <h2>Tus Estadísticas</h2>
+            <h2>Estadísticas del Negocio</h2>
             <div class="dashboard_cards-container">
                 <div class="dashboard_card">
                     <h3>Total de Productos</h3>
@@ -53,7 +74,6 @@ $dashboardData = $getDashboardData->execute();
                 </div>
             </div>
         </div>
-
 
         <div class="dashboard_tables-container">
             <div class="dashboard_table-wrapper">
@@ -87,7 +107,7 @@ $dashboardData = $getDashboardData->execute();
             </div>
 
             <div class="dashboard_table-wrapper">
-                <h2>Productos con Bajo Stock (&lt;5)</h2>
+                <h2>Productos con Bajo Stock (<5)</h2>
                 <table>
                     <thead>
                         <tr>
@@ -115,12 +135,12 @@ $dashboardData = $getDashboardData->execute();
 
         <div class="dashboard_promo-card">
              <div class="promo_text">
-                <h3>¡Aprende aún más!</h3>
-                <p>Desbloquea funciones premium y lleva el control de tu inventario al siguiente nivel.</p>
-                <a href="#" class="promo_button">Volverse Premium</a>
+                <h3>¡Gestiona múltiples negocios!</h3>
+                <p>Puedes crear hasta 2 negocios independientes o unirte a otros usando códigos de invitación.</p>
+                <a href="gestionar-negocios.php" class="promo_button">Gestionar Negocios</a>
             </div>
             <div class="promo_icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
             </div>
         </div>
 
